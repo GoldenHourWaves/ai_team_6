@@ -14,7 +14,7 @@ plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False
 
 # 데이터 로드
-data_path = r'C:\junwoo\AI_Project_01_Team6\data\Community_data\SNS_FINAL_RECORDS_20260131_071140\FINAL_10K_RECORDS.csv'
+data_path = r'C:\junwoo\AI_Project_01_Team6\data\Community_data\FINAL_10K_RECORDS.csv'
 df = pd.read_csv(data_path)
 
 # 키워드 추출
