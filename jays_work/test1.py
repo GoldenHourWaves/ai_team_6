@@ -39,3 +39,6 @@ today = datetime.now().strftime('%y%m%d')
 filename = f"./data/merged_{myKey}_{today}.csv"
 merge_data.to_csv(filename, index=False, encoding='utf-8-sig')
 print(f"데이터 저장 완료: {filename}")
+
+
+
