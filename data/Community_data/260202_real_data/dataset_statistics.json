@@ -1,0 +1,37 @@
+{
+  "total_urls": 145,
+  "by_platform": {
+    "X": 83,
+    "Reddit": 62
+  },
+  "by_category": {
+    "General_Discussion": 40,
+    "Liquidation_Event": 37,
+    "Whale_Tracking": 17,
+    "Trump_Tariff_Impact": 15,
+    "Daily_Discussion": 13,
+    "Exchange_Issue": 9,
+    "Flash_Crash_Analysis": 6,
+    "Manipulation_Suspicion": 3,
+    "DeFi_Protocol": 3,
+    "Lessons_Learned": 2
+  },
+  "by_sentiment": {
+    "Negative": 63,
+    "Mixed": 49,
+    "Neutral": 16,
+    "Very_Negative": 10,
+    "Positive": 7
+  },
+  "by_time_period": {
+    "No_Specific_Date": 79,
+    "Oct_10_During_Crash": 37,
+    "October_2025_General": 21,
+    "Oct_12-14_Recovery": 4,
+    "Oct_11_Day_After": 3,
+    "November_Post_Crash": 1
+  },
+  "avg_influence_score": 9.431034482758621,
+  "max_influence_score": 54.6,
+  "collection_timestamp": "2026-02-02 01:18:54"
+}
