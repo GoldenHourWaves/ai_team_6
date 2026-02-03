@@ -1,0 +1,169 @@
+{
+  "version": "0.42.0",
+  "projectName": "Bitcoin Market Crash Analysis Dashboard",
+  "description": "비트코인 시장 급락 분석 대시보드 - 뉴스, SNS, 거시경제 지표를 통합한 다각적 분석",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "데이터 로딩 및 초기 검증",
+      "description": "모든 CSV 파일을 읽고 데이터 구조 확인",
+      "details": "processed 디렉토리의 모든 CSV 파일을 pandas로 로드하고, 컬럼명, 데이터 타입, 결측치, 날짜 범위를 확인합니다.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [],
+      "testStrategy": "각 CSV 파일이 정상적으로 로드되고 예상 컬럼이 존재하는지 확인"
+    },
+    {
+      "id": 2,
+      "title": "날짜 형식 통일 및 데이터 정제",
+      "description": "모든 데이터의 날짜 형식을 통일하고 결측치 처리",
+      "details": "YYYYMMDD와 YYYY-MM-DD 형식을 datetime으로 변환하고, M2 같은 월별 데이터는 forward fill 또는 선형 보간 적용",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [1],
+      "testStrategy": "날짜 컬럼이 모두 datetime 형식이고 결측치가 처리되었는지 확인"
+    },
+    {
+      "id": 3,
+      "title": "전체 데이터 통합 (Master DataFrame 생성)",
+      "description": "날짜를 기준으로 모든 데이터를 하나의 DataFrame으로 병합",
+      "details": "features_daily, daily_data_merged, merged_m2_inflation, FINAL_SNS_YOUTUBE 데이터를 날짜 기준으로 조인하여 통합 DataFrame 생성",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [2],
+      "testStrategy": "통합 DataFrame의 행 수, 컬럼 수, 결측치 비율 확인"
+    },
+    {
+      "id": 4,
+      "title": "기본 시각화 - 가격 시계열 그래프",
+      "description": "비트코인 가격의 시계열 변화 시각화",
+      "details": "matplotlib/seaborn으로 BTC_Price의 일별 변화를 선 그래프로 표현. 10월 10일 급락 시점 마킹",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "그래프가 정상 출력되고 급락 구간이 명확히 표시되는지 확인"
+    },
+    {
+      "id": 5,
+      "title": "상관관계 히트맵 생성",
+      "description": "모든 수치형 변수 간의 피어슨 상관계수 히트맵",
+      "details": "seaborn.heatmap으로 가격, 뉴스 톤, 거시경제 지표, Open Interest 간의 상관관계 시각화",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "히트맵에서 높은 상관관계(>0.7 또는 <-0.7) 변수 쌍 확인"
+    },
+    {
+      "id": 6,
+      "title": "정치 테마 시계열 분석",
+      "description": "EPU_POLICY, LEADER, GOVERNMENT 테마와 가격 변동 분석",
+      "details": "정치 관련 테마 카운트를 시계열로 플롯하고, 가격과의 시간적 관계 탐색",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "정치 테마 급증 시점과 가격 급락 시점의 시간차 확인"
+    },
+    {
+      "id": 7,
+      "title": "SNS/YouTube 감성 분석",
+      "description": "커뮤니티 데이터에서 감성 점수 추출 및 시각화",
+      "details": "content 필드에서 긍정/부정 키워드 추출, TextBlob 또는 사전 기반 감성 분석 수행",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "감성 점수가 -1~1 범위에 있고, panic selling/buying the dip 시점 구분 가능"
+    },
+    {
+      "id": 8,
+      "title": "감성-가격 회귀 분석",
+      "description": "뉴스 톤 및 SNS 감성과 비트코인 가격 간의 회귀 모델",
+      "details": "sklearn.linear_model로 선형 회귀 수행, tone_mean과 감성 점수를 독립변수로 BTC_Price 예측",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [7],
+      "testStrategy": "R-squared 값과 회귀 계수의 유의성(p-value) 확인"
+    },
+    {
+      "id": 9,
+      "title": "거시경제 지표 다중 회귀 분석",
+      "description": "M2, CPI, Gold, Yield_10Y, USD_Index와 비트코인 가격의 관계",
+      "details": "다중 선형 회귀로 거시경제 변수들이 BTC_Price에 미치는 영향 정량화",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "각 변수의 계수와 p-value, 전체 모델의 R-squared 확인"
+    },
+    {
+      "id": 10,
+      "title": "Open Interest 및 고래 행동 분석",
+      "description": "미결제약정 급증 시점과 가격 변동성 분석",
+      "details": "Open_Interest 데이터와 가격 변화율을 scatter plot으로 표현, 이상치 탐지",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [3],
+      "testStrategy": "OI 급증 시점에 가격 급락이 동반되는지 시각적 확인"
+    },
+    {
+      "id": 11,
+      "title": "워드클라우드 생성",
+      "description": "긍정/부정 댓글 분리 후 워드클라우드",
+      "details": "감성 점수 기준으로 댓글을 분리, wordcloud 라이브러리로 시각화",
+      "status": "done",
+      "priority": "low",
+      "dependencies": [7],
+      "testStrategy": "긍정 워드클라우드에 'buying the dip', 부정에 'panic selling' 등장"
+    },
+    {
+      "id": 12,
+      "title": "네트워크 관계도 생성",
+      "description": "뉴스 테마-가격-감성-OI 간의 네트워크 시각화",
+      "details": "networkx로 노드(테마, 가격, 감성, OI) 생성, 상관관계 기반 엣지 연결, plotly로 인터랙티브 시각화",
+      "status": "done",
+      "priority": "low",
+      "dependencies": [5, 8, 10],
+      "testStrategy": "네트워크에서 중심성이 높은 노드가 주요 변수인지 확인"
+    },
+    {
+      "id": 13,
+      "title": "Streamlit 대시보드 프로토타입 개발",
+      "description": "인터랙티브 웹 대시보드 구축",
+      "details": "streamlit으로 날짜 슬라이더, 변수 선택 드롭다운, 차트 자동 업데이트 기능 구현",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [4, 5, 8, 9, 10],
+      "testStrategy": "로컬 서버에서 대시보드 실행 및 인터랙션 테스트"
+    },
+    {
+      "id": 14,
+      "title": "분석 리포트 자동 생성",
+      "description": "주요 인사이트를 PDF 리포트로 출력",
+      "details": "matplotlib 차트를 PDF로 저장, reportlab 또는 fpdf로 텍스트 추가",
+      "status": "done",
+      "priority": "low",
+      "dependencies": [8, 9, 10],
+      "testStrategy": "PDF 파일이 생성되고 차트 및 텍스트가 정상 표시되는지 확인"
+    },
+    {
+      "id": 15,
+      "title": "프로젝트 문서화 및 배포",
+      "description": "README, 사용자 가이드 작성 및 GitHub Pages 배포",
+      "details": "README.md에 프로젝트 설명, 설치 방법, 사용법 작성. Streamlit Cloud 배포 고려",
+      "status": "done",
+      "priority": "low",
+      "dependencies": [13],
+      "testStrategy": "GitHub 레포지토리에 문서가 잘 보이고 배포된 URL이 작동하는지 확인"
+    }
+  ],
+  "tags": {
+    "master": {
+      "description": "Main development branch",
+      "createdAt": "2026-02-03T00:00:00.000Z"
+    }
+  },
+  "metadata": {
+    "createdAt": "2026-02-03T00:00:00.000Z",
+    "updatedAt": "2026-02-03T00:00:00.000Z",
+    "totalTasks": 15,
+    "completedTasks": 0
+  }
+}
