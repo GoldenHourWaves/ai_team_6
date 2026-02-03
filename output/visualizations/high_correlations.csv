@@ -1,0 +1,16 @@
+﻿var1,var2,correlation
+M2SL,CPI_YoY_Inflation_Rate,-1.0
+n_articles,theme_cnt__ECON_BITCOIN,0.9927475251702677
+tone_neg_share,tone_pos_share,-0.9564802610550692
+n_articles,theme_cnt__EPU_POLICY,0.9174636005088653
+theme_cnt__EPU_POLICY,theme_cnt__ECON_BITCOIN,0.9162413723183725
+tone_mean,tone_pos_share,0.8763131776905948
+tone_mean,tone_neg_share,-0.8754998407777613
+Gold_Price_YF,M2SL,0.8705916457811924
+Gold_Price_YF,CPI_YoY_Inflation_Rate,-0.8705916457811809
+theme_cnt__EPU_POLICY,theme_cnt__GENERAL_GOVERNMENT,0.8188013665366982
+theme_cnt__EPU_POLICY,theme_cnt__LEADER,0.7644196317956055
+n_articles,theme_cnt__GENERAL_GOVERNMENT,0.7412958602929248
+USD_Index,M2SL,0.7401231000734121
+USD_Index,CPI_YoY_Inflation_Rate,-0.7401231000734058
+theme_cnt__GENERAL_GOVERNMENT,theme_cnt__ECON_BITCOIN,0.7392894500271077

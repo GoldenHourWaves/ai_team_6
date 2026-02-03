@@ -1,0 +1,183 @@
+<context>
+# Overview  
+비트코인 시장 급락 분석 대시보드는 2025년 9월~10월 비트코인 가격 급락 현상을 다각적으로 분석하고 시각화하는 데이터 분석 프로젝트입니다. 뉴스 기사, SNS/YouTube 커뮤니티 데이터, 거시경제 지표, 가격 데이터를 종합하여 투자자와 연구자들이 시장 변동성의 근본 원인을 이해할 수 있도록 돕습니다.
+
+이 프로젝트는 GDELT 뉴스 데이터, Reddit/YouTube 커뮤니티 감성 데이터, 그리고 M2 통화량, CPI, 금 가격, 국채 수익률 등의 거시경제 지표를 통합하여 비트코인 가격 변동의 복합적인 원인을 탐색합니다.
+
+# Core Features  
+## 1. 시장 급락의 트리거와 정치적 요인의 상관관계 분석
+- **기능**: GDELT 뉴스 데이터의 정치 관련 테마(EPU_POLICY, LEADER, GOVERNMENT 등)와 비트코인 가격 변동 간의 시간별 상관관계 분석
+- **중요성**: 정치적 이벤트가 가상자산 시장에 미치는 영향을 정량화
+- **시각화**: 시계열 그래프, 상관관계 히트맵, 이벤트 타임라인
+
+## 2. 투자자 심리 분석 (공포와 탐욕의 교차)
+- **기능**: SNS/YouTube 댓글 및 콘텐츠의 감성 분석을 통해 투자자 심리 변화 추적
+- **중요성**: 공포(panic selling)와 탐욕(buying the dip) 감정이 교차하는 시점 포착
+- **시각화**: 감성 스코어 시계열, 워드클라우드, 감정 분포 차트
+
+## 3. 거시경제 지표와 가상자산의 관계
+- **기능**: M2 통화량, CPI 인플레이션율, 금 가격, 10년물 국채 수익률, USD Index와 비트코인 가격 간의 회귀 분석
+- **중요성**: 전통 금융 지표가 비트코인 가격에 미치는 영향 측정
+- **시각화**: 다중 회귀 분석 그래프, 변수 간 상관관계 히트맵, 시계열 비교 차트
+
+## 4. 감성-가격 회귀 분석
+- **기능**: 뉴스 톤(tone_mean, tone_neg_share, tone_pos_share)과 비트코인 가격 변동 간의 선형/비선형 회귀 모델 구축
+- **중요성**: 미디어 감성이 가격에 미치는 선행/동행/후행 효과 검증
+- **시각화**: 산점도 + 회귀선, 잔차 플롯, 예측 vs 실제 가격 비교
+
+## 5. 고래(Whale) 행동 패턴
+- **기능**: Open Interest(미결제약정) 데이터와 가격 변동성을 분석하여 대규모 투자자의 움직임 추적
+- **중요성**: 시장 조작 가능성 및 대규모 자금 이동의 영향 분석
+- **시각화**: Open Interest vs 가격 변동 그래프, 거래량 분석, 네트워크 관계도(뉴스-가격-OI 연결)
+
+# User Experience  
+## User Personas
+- **데이터 과학자/연구자**: 가상자산 시장의 복합적 요인 연구
+- **투자자/트레이더**: 시장 심리 및 거시경제 지표를 통한 의사결정 지원
+- **정책 입안자**: 가상자산 규제가 시장에 미치는 영향 평가
+
+## Key User Flows
+1. 데이터 로드 및 전처리 완료 확인
+2. 원하는 분석 항목 선택 (정치 요인, 투자 심리, 거시경제, 감성-가격, 고래 행동)
+3. 시각화 대시보드에서 인터랙티브 차트 탐색
+4. 분석 결과 및 인사이트 리포트 다운로드
+
+## UI/UX Considerations
+- Jupyter Notebook 또는 Streamlit/Dash 기반 인터랙티브 대시보드
+- 날짜 범위 선택 필터
+- 실시간 데이터 업데이트 가능성 고려 (향후 확장)
+- 모바일 반응형 디자인 (선택사항)
+</context>
+
+<PRD>
+# Technical Architecture  
+## System Components
+- **데이터 소스**:
+  - `bitcoin_news_merged_0.csv`: GDELT 뉴스 기사 데이터
+  - `gdelt_articles_modified_0.csv`: 수정된 GDELT 기사
+  - `features_daily.csv`: 일별 집계된 뉴스 테마 및 톤 데이터
+  - `daily_data_merged.csv`: 비트코인 가격, 금 가격, 국채 수익률, M2, USD Index 통합 데이터
+  - `merged_m2_inflation.csv`: M2 통화량 및 CPI 인플레이션 데이터
+  - `FINAL_SNS_YOUTUBE.csv`: Reddit/YouTube 커뮤니티 감성 데이터
+
+- **분석 엔진**:
+  - Python (pandas, numpy, scikit-learn)
+  - 통계 모델링: statsmodels, scipy
+  - 감성 분석: NLTK, TextBlob 또는 사전 학습 모델
+  - 네트워크 분석: networkx
+
+- **시각화 라이브러리**:
+  - matplotlib, seaborn (정적 시각화)
+  - plotly, altair (인터랙티브 시각화)
+  - streamlit 또는 dash (대시보드 프레임워크)
+
+## Data Models
+- **Time Series Data**: 날짜를 기준으로 정렬된 시계열 데이터 (2025-09-01 ~ 2025-10-10)
+- **Feature Matrix**: 뉴스 테마 카운트, 톤 점수, 거시경제 지표를 하나의 DataFrame으로 병합
+- **Sentiment Scores**: SNS/YouTube 데이터에서 추출한 감성 점수 (긍정/부정/중립)
+- **Correlation Matrix**: 변수 간 피어슨 상관계수 행렬
+
+## APIs and Integrations
+- 현재 단계: CSV 파일 기반 오프라인 분석
+- 향후 확장: 
+  - CoinGecko/Binance API (실시간 가격 데이터)
+  - FRED API (거시경제 지표)
+  - Twitter/Reddit API (실시간 감성 분석)
+
+## Infrastructure Requirements
+- Python 3.8+ 환경
+- Jupyter Notebook 또는 VS Code
+- RAM: 8GB 이상 권장 (대용량 CSV 처리)
+- 저장소: GitHub 레포지토리
+
+# Development Roadmap  
+## Phase 1: MVP - 데이터 통합 및 기본 시각화
+- 모든 CSV 파일을 하나의 DataFrame으로 병합 (날짜 기준 조인)
+- 결측치 처리 및 데이터 정제
+- 비트코인 가격 시계열 그래프
+- 뉴스 톤(tone_mean) vs 가격 scatter plot
+- 상관관계 히트맵 (모든 수치형 변수)
+
+## Phase 2: 고급 분석 - 회귀 모델 및 테마 분석
+- 정치 테마(EPU_POLICY, LEADER 등) 시계열 분석
+- 감성-가격 선형 회귀 모델 구축
+- 거시경제 지표(M2, CPI, Gold) vs 비트코인 다중 회귀 분석
+- Open Interest vs 가격 변동성 분석
+
+## Phase 3: 인터랙티브 대시보드 개발
+- Streamlit 또는 Dash로 웹 대시보드 구축
+- 날짜 범위 슬라이더, 변수 선택 드롭다운
+- 실시간 필터링 및 차트 업데이트
+- 분석 결과 PDF/PNG 다운로드 기능
+
+## Phase 4: 네트워크 분석 및 고급 시각화
+- 뉴스 테마-가격-감성 네트워크 관계도 (networkx + plotly)
+- 고래 행동 패턴 시각화 (OI 급증 이벤트 마킹)
+- 워드클라우드 (긍정/부정 댓글 분리)
+- 인터랙티브 히트맵 (plotly)
+
+## Phase 5: 리포팅 및 배포
+- 자동화된 분석 리포트 생성 (PDF)
+- GitHub Pages 또는 Streamlit Cloud 배포
+- 사용자 가이드 및 문서화
+
+# Logical Dependency Chain
+1. **Foundation (Phase 1)**: 
+   - 먼저 모든 데이터를 읽고 날짜 형식 통일
+   - 결측치 처리 및 데이터 검증
+   - 기본 시각화로 데이터 품질 확인
+
+2. **Core Analysis (Phase 2)**:
+   - Phase 1의 정제된 데이터를 바탕으로 회귀 분석 수행
+   - 상관관계 분석을 통해 주요 변수 선정
+   - 통계적 유의성 검증
+
+3. **Visualization & UX (Phase 3)**:
+   - Phase 2의 분석 결과를 대시보드에 통합
+   - 사용자 인터랙션 구현
+
+4. **Advanced Features (Phase 4)**:
+   - Phase 3의 대시보드에 네트워크 분석 추가
+   - 고급 시각화로 인사이트 강화
+
+5. **Polish & Deploy (Phase 5)**:
+   - 최종 배포 및 문서화
+
+# Risks and Mitigations  
+## Technical Challenges
+- **리스크**: CSV 파일의 날짜 형식 불일치 (YYYYMMDD vs YYYY-MM-DD)
+- **완화**: pandas의 `pd.to_datetime` 사용, 명시적 날짜 파싱
+
+- **리스크**: 결측치가 많은 거시경제 지표 (M2는 월별 데이터)
+- **완화**: Forward fill 또는 선형 보간법 적용
+
+## MVP 범위 설정
+- **리스크**: 6개 분석 항목을 모두 구현하려면 시간 초과 가능
+- **완화**: Phase 1-2를 MVP로 설정, Phase 3-4는 향후 확장
+
+## Resource Constraints
+- **리스크**: 대용량 SNS 데이터(6384행) 처리 속도 저하
+- **완화**: 데이터 샘플링 또는 청크 단위 처리
+
+# Appendix  
+## Research Findings
+- GDELT 뉴스 데이터는 36개 이상의 테마 카운트 포함 (정치, 경제, 규제 등)
+- YouTube 댓글에서 "panic selling", "buying the dip" 키워드 다수 발견
+- 2025년 10월 10일 비트코인 급락 당일 특이 패턴 존재 가능성
+
+## Technical Specifications
+- **Data Range**: 2025-09-01 ~ 2025-11-01
+- **Primary Target Variable**: BTC_Price (daily_data_merged.csv)
+- **Key Features**: 
+  - News: tone_mean, tone_neg_share, EPU_POLICY, LEADER
+  - Macro: M2SL, CPI_YoY_Inflation_Rate, Gold_Price, Yield_10Y
+  - Community: engagement, sentiment (추출 필요)
+  - Whale: Open_Interest
+
+## Example Visualizations
+1. **히트맵**: 모든 변수 간 상관계수 (seaborn.heatmap)
+2. **시계열**: 가격 vs 뉴스 톤 vs Open Interest (plotly multi-axis)
+3. **네트워크**: 테마 노드 - 가격 노드 - 감성 노드 연결 (networkx)
+4. **워드클라우드**: 긍정 댓글 vs 부정 댓글 (wordcloud)
+5. **회귀 플롯**: 감성 점수 vs 가격 변동 (seaborn.regplot)
+</PRD>

@@ -1,0 +1,71 @@
+﻿sentiment,keyword,count
+positive,crypto,1509
+positive,bitcoin,1509
+positive,market,1509
+positive,October 2025,1509
+positive,crash,582
+positive,dump,582
+positive,selloff,582
+positive,bloodbath,582
+positive,panic,582
+positive,manipulation,316
+positive,liquidation,213
+positive,leverage,213
+positive,margin call,213
+positive,rekt,213
+positive,whale,209
+positive,large holder,209
+positive,insider,209
+positive,coordinated,107
+positive,suspicious,107
+positive,timing,107
+positive,Trump,102
+positive,tariff,102
+positive,China,102
+positive,trade war,102
+positive,geopolitical,102
+positive,exchange,47
+positive,Binance,47
+positive,Hyperliquid,47
+positive,outage,47
+positive,down,47
+positive,lost,38
+positive,ruined,38
+positive,savings,38
+positive,bankruptcy,38
+positive,devastated,38
+negative,crypto,2955
+negative,bitcoin,2955
+negative,market,2955
+negative,October 2025,2955
+negative,crash,1282
+negative,dump,1282
+negative,selloff,1282
+negative,bloodbath,1282
+negative,panic,1282
+negative,manipulation,595
+negative,liquidation,526
+negative,leverage,526
+negative,margin call,526
+negative,rekt,526
+negative,whale,341
+negative,large holder,341
+negative,insider,341
+negative,coordinated,254
+negative,suspicious,254
+negative,timing,254
+negative,Trump,148
+negative,tariff,148
+negative,China,148
+negative,trade war,148
+negative,geopolitical,148
+negative,exchange,139
+negative,Binance,139
+negative,Hyperliquid,139
+negative,outage,139
+negative,down,139
+negative,lost,87
+negative,ruined,87
+negative,savings,87
+negative,bankruptcy,87
+negative,devastated,87
