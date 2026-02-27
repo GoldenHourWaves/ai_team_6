@@ -1,0 +1,11 @@
+Indicator,Period,Leading_Days,Correlation,Strength
+Sentiment_Score,2025_Oct,3,-0.8851952597420817,Strong
+Twitter_Mentions,2025_Oct,2,0.7983999729853221,Strong
+Reddit_Posts,2025_Oct,2,0.797872373746199,Strong
+Google_Trends,2025_Oct,2,0.7942422004961158,Strong
+News_Negative,2025_Oct,2,0.6786317275528633,Moderate
+Sentiment_Score,2026_Jan_Feb,3,0.5687722168374691,Moderate
+News_Negative,2026_Jan_Feb,2,-0.5005455097243536,Moderate
+Google_Trends,2026_Jan_Feb,2,-0.40097856625506156,Moderate
+Twitter_Mentions,2026_Jan_Feb,2,-0.39962944270669754,Weak
+Reddit_Posts,2026_Jan_Feb,2,-0.399123153836611,Weak
